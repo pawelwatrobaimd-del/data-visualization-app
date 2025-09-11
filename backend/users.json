@@ -1,0 +1,19 @@
+{
+    "admin": {
+        "password": "adminpassword",
+        "role": "admin"
+    },
+    "pawelw": {
+        "password": "konkurs2",
+        "role": "user"
+    },
+    "paweld": {
+        "password": "pawel2025",
+        "role": "user"
+    },
+    "marcelina": {
+        "password": "marcelina2025",
+        "role": "user"
+    }
+    
+}
