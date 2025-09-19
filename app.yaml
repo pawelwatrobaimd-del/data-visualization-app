@@ -1,0 +1,29 @@
+runtime: python311
+instance_class: F1
+
+# Zakładając, że Twój plik z aplikacją Flask to 'backend/server.py'
+entrypoint: gunicorn -b :$PORT backend.server:app
+
+handlers:
+  # Przekieruj wszystkie wywołania API do aplikacji Flask.
+  - url: /api/.*
+    script: auto
+    secure: always
+
+  # Serwuj statyczne zasoby (JS, CSS) wygenerowane przez 'npm run build'.
+  - url: /static
+    static_dir: build/static
+    secure: always
+
+  # Serwuj inne pliki statyczne z katalogu build (np. manifest.json, favicon.ico).
+  - url: /(.*\.(json|ico|png|jpg|jpeg|gif|svg|txt|map))$
+    static_files: build/\1
+    upload: build/.*\.(json|ico|png|jpg|jpeg|gif|svg|txt|map)$
+    secure: always
+
+  # Dla wszystkich innych ścieżek serwuj główny plik aplikacji React.
+  # Jest to niezbędne do poprawnego działania routingu po stronie klienta.
+  - url: /.*
+    static_files: build/index.html
+    upload: build/index.html
+    secure: always

@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './UserManagementModal.css';
 
-// Zmienna globalna dla adresu URL Twojego API
-const API_URL = 'https://analiza-finansowa.lm.r.appspot.com/api';
-
 const UserManagementModal = ({ onClose }) => {
   const [users, setUsers] = useState([]);
   const [message, setMessage] = useState('');
@@ -13,7 +10,7 @@ const UserManagementModal = ({ onClose }) => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get(`${API_URL}/users`);
+      const response = await axios.get('/api/users');
       setUsers(Object.entries(response.data).map(([username, data]) => ({ username, ...data })));
     } catch (error) {
       setMessage('Błąd podczas ładowania listy użytkowników.');
@@ -27,7 +24,7 @@ const UserManagementModal = ({ onClose }) => {
   const handleAddUser = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`${API_URL}/users`, newUser);
+      await axios.post('/api/users', newUser);
       setMessage('Użytkownik dodany pomyślnie!');
       setNewUser({ username: '', password: '', role: 'user' });
       fetchUsers();
@@ -39,7 +36,7 @@ const UserManagementModal = ({ onClose }) => {
   const handleDeleteUser = async (username) => {
     if (window.confirm(`Czy na pewno chcesz usunąć użytkownika ${username}?`)) {
       try {
-        await axios.delete(`${API_URL}/users/${username}`);
+        await axios.delete(`/api/users/${username}`);
         setMessage('Użytkownik usunięty pomyślnie!');
         fetchUsers();
       } catch (error) {
@@ -54,7 +51,7 @@ const UserManagementModal = ({ onClose }) => {
 
   const handleSaveEdit = async () => {
     try {
-      await axios.put(`${API_URL}/users/${editingUser.username}`, editingUser);
+      await axios.put(`/api/users/${editingUser.username}`, editingUser);
       setMessage('Użytkownik zaktualizowany pomyślnie!');
       setEditingUser(null);
       fetchUsers();

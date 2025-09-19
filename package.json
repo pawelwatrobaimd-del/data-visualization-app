@@ -22,8 +22,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "mkdir -p public && cp -r backend/public/* public/ && react-scripts start",
+    "prebuild": "mkdir -p public && cp -r backend/public/* public/",
+    "build": "npm run prebuild && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

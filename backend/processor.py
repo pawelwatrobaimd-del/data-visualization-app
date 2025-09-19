@@ -3,8 +3,9 @@ import json
 import shutil
 import pandas as pd
 
-# Dostosuj tę ścieżkę do Twojego projektu
-PUBLIC_FOLDER = 'C:/Users/Paweł/Desktop/ProjektyProgramistyczne/analiza-kosztów/data-visualization-app/public'
+# Use a relative path to the public folder inside the backend directory
+BACKEND_DIR = os.path.dirname(os.path.abspath(__file__))
+PUBLIC_FOLDER = os.path.join(BACKEND_DIR, 'public')
 GENERATED_FOLDER = 'generated'
 
 def process_xlsx_files(upload_folder):

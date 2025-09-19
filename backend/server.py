@@ -6,8 +6,9 @@ from flask_cors import CORS
 from werkzeug.utils import secure_filename
 
 # Inicjalizacja aplikacji Flask
-app = Flask(__name__, static_folder='build')
-CORS(app, resources={r"/api/*": {"origins": "*"}}) 
+STATIC_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'build')
+app = Flask(__name__, static_folder=STATIC_FOLDER)
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 # Ustawienie ścieżek
 # Użyj os.path.dirname(__file__) aby upewnić się, że ścieżka jest relatywna do pliku server.py
@@ -48,7 +49,7 @@ def login():
     if user and user['password'] == password:
         return jsonify({"message": "Login successful", "role": user['role']}), 200
     return jsonify({"message": "Invalid credentials"}), 401
-
+    
 @app.route('/api/list-json-files', methods=['GET'])
 def list_json_files():
     metadata = load_metadata()
@@ -116,7 +117,7 @@ def update_user(username):
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def serve(path):
-    if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
+    if path and os.path.exists(os.path.join(app.static_folder, path)):
         return send_from_directory(app.static_folder, path)
     else:
         return send_from_directory(app.static_folder, 'index.html')

@@ -1,0 +1,20 @@
+# Ten plik określa, które pliki *nie* będą wgrywane na Google App Engine.
+# Zobacz: https://cloud.google.com/sdk/gcloud/reference/topic/gcloudignore
+
+# Najważniejsze: zignoruj wszystkie zależności Node.js.
+node_modules/
+
+# Pliki budowania Pythona i cache.
+__pycache__/
+*.pyc
+
+# Pliki repozytorium Git.
+.git/
+.gitignore
+
+# Pliki środowiska lokalnego.
+.env
+.env.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

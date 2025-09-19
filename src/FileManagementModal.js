@@ -11,7 +11,7 @@ const FileManagementModal = ({ onClose, onUpdate }) => {
 
   const fetchFiles = async () => {
     try {
-      const response = await axios.get('https://analiza-finansowa.lm.r.appspot.com/api/list-json-files');
+      const response = await axios.get('/api/list-json-files');
       setFiles(response.data);
     } catch (error) {
       setMessage('Błąd podczas ładowania listy plików.');
@@ -53,7 +53,7 @@ const FileManagementModal = ({ onClose, onUpdate }) => {
     }
 
     try {
-      const response = await axios.post('https://analiza-finansowa.lm.r.appspot.com/api/upload-json', formData, {
+      const response = await axios.post('/api/upload-json', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

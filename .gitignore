@@ -1,15 +1,28 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Ten plik określa, które pliki i foldery są ignorowane przez Git.
 
 # dependencies
 /node_modules
 /.pnp
 .pnp.js
+# Zależności
+node_modules/
 
 # testing
 /coverage
+# Pliki budowania frontendu
+build/
+dist/
 
 # production
 /build
+# Pliki cache i budowania Pythona
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+env/
 
 # misc
 .DS_Store
@@ -17,7 +30,11 @@
 .env.development.local
 .env.test.local
 .env.production.local
+# Pliki środowiskowe - nigdy nie powinny być w repozytorium!
+.env
+.env.*
 
+# Logi
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

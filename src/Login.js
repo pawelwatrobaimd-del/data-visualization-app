@@ -9,7 +9,7 @@ const Login = ({ onLogin }) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://analiza-finansowa.lm.r.appspot.com/api/login', { username, password });
+      const response = await axios.post('/api/login', { username, password });
       const { role } = response.data;
       const user = { username, role };
       localStorage.setItem('user', JSON.stringify(user));
